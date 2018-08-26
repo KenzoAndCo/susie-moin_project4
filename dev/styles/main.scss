@@ -1,23 +1,89 @@
 @import 'setup';
 
 body {
+	background-color: #f2f2f2;
 	color: black;
 	font-size: 62.5%;
+    font-family: 'Work Sans', sans-serif;
 }
 
 // i just added this code to see what im working with you'll want to taret the images with classes 
 img {
-	max-width: 200px;
+	max-width: 90px;
 }
 
 header {
 	width: 100%;
-	height: 25px;
+	height: 50px;
+		h1 {
+			font-weight: 700;
+			cursor: pointer;
+		}
+		h2 {
+			cursor: pointer;
+		}
+}
+
+.hero {
+	max-width: 1200px;
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	font-size: 2rem;
+}
+
+.wrapper {
+	max-width: 1200px;
+	margin: 0 auto;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+a {
+	text-decoration: none;
+}
+
+.search-bar {
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;	
+}
+
+#destination {
+	background-color: #f2f2f2;
+	color: black;
+	padding: 10px;
+	border-radius: 1.5rem;
+}
+
+.block-title {
+	text-transform: uppercase;
+	font-size: 1.2rem;
+	letter-spacing: 1px;
+	font-weight: 500;
+}
+
+.key-info {
+	font-size: 1.8rem;
+}
+
+.weather-text, p {
+	font-size: 1rem;
+}
+
+ul {
+	list-style: none;
 }
 
 
-.container {
+.container {	
 	width: 100vw;
+	max-width: 1200px;
+	min-height: 700px;
+	margin: 0 auto;
 	height: calc(100vh - 25px);
 	display: grid;
 	grid-template-areas: 
@@ -25,48 +91,269 @@ header {
 	"poi poi tours tours"
 	"language airport tours tours";
 	grid-template-columns: 25% 25% 25% 25%;
-	grid-template-rows: 33% 33% 33%;
+	// grid-template-rows: 50% 50% 50%;
+	grid-template-rows: 33% 33% 33% 33%;
 }
 
 
+#weather, #currency, #tours, #language, #airport, #poi {
+	line-height: 1.25;
+	padding: 10px;
+		li {
+			padding: 25px 0;
+		}
+		h2 {
+			margin-bottom: 10px;
+		}
+}
+
+#poi, #tours {
+	li {
+		border-bottom: 1px solid #999;
+	}
+	:nth-last-child(1) {
+		border-bottom: none;
+	}
+}
+
+.poi-list {
+	display: flex;
+		figure {
+			width: 25%;
+		}
+}
+
 #poi {
 	grid-area: poi;
-	background: red;
+	// background: red;
+			figure {
+				display: block;
+		}
 }
 
 #weather {
 	grid-area: weather;
-	background: yellow;
+	// background: yellow;
+	padding: 10px;
 }
 
 #currency{
 	grid-area: currency;
-	background: blue;
+	// background: blue;
+}
+
+#location {
+	border: none;
+	border-bottom: 2px solid black;
+	padding: 10px 25px 10px 0;
+	background: #f2f2f2;
+	text-transform: uppercase;
 }
 
 #tours{
 	grid-area: tours;
-	background: green;
+	// background: green;
+		a {
+			text-decoration: none;
+			color: black;
+			text-transform: uppercase;
+			font-weight: 700;
+		}
 }
 
 #language {
 	grid-area: language;
-	background: PURPLE;
+	// background: PURPLE;
 }
 
 #airport{
 	grid-area: airport;
-	background: BROWN;
+	// background: BROWN;
+				p {
+					font-size: 0.8rem;
+					margin-top: 5px;
+				}
 }
 
 input[type=search] {
-	width: 300px;
+	width: 150px;
+}
+
+#submit {
+	border: none;
+	border-left: none;
+	background: transparent;
+	margin-left: -12px;
+	margin-top: 2px;
+		i {
+			color: grey;
+		}
 }
 
 .container div {
 	// height: 300px;
 	border: 1px solid black;
-	background: yellow;
+	// background: yellow;
+}
+
+								//////* HOVER STATES *//////
+.hvr-shadow {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-property: box-shadow;
+  transition-property: box-shadow;
+}
+
+.hvr-shadow:hover, .hvr-shadow:focus, .hvr-shadow:active {
+  box-shadow: 0 10px 10px -10px rgba(0, 0, 0, 0.5);
+}
+
+.hvr-underline-from-center {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  position: relative;
+  overflow: hidden;
+}
+
+.hvr-underline-from-center:before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: 51%;
+  right: 51%;
+  bottom: 0;
+  background: darkgray;
+  height: 4px;
+  -webkit-transition-property: left, right;
+  transition-property: left, right;
+  -webkit-transition-duration: 0.2s;
+  transition-duration: 0.2s;
+  -webkit-transition-timing-function: ease-out;
+  transition-timing-function: ease-out;
+}
+
+.hvr-underline-from-center:hover:before, .hvr-underline-from-center:focus:before, .hvr-underline-from-center:active:before {
+  left: 0;
+  right: 0;
+}
+
+.hvr-grow-shadow {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-property: box-shadow, transform;
+  transition-property: box-shadow, transform;
+}
+
+.hvr-grow-shadow:hover, .hvr-grow-shadow:focus, .hvr-grow-shadow:active {
+  box-shadow: 0 10px 10px -10px rgba(0, 0, 0, 0.5);
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+}
+
+.hvr-icon-back {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  -webkit-transition-duration: 0.1s;
+  transition-duration: 0.1s;
+}
+
+.hvr-icon-back .hvr-icon {
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-transition-duration: 0.1s;
+  transition-duration: 0.1s;
+  -webkit-transition-property: transform;
+  transition-property: transform;
+  -webkit-transition-timing-function: ease-out;
+  transition-timing-function: ease-out;
+}
+
+.hvr-icon-back:hover .hvr-icon, .hvr-icon-back:focus .hvr-icon, .hvr-icon-back:active .hvr-icon {
+  -webkit-transform: translateX(-4px);
+  transform: translateX(-4px);
+}
+
+
+@-webkit-keyframes hvr-icon-float-away {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    -webkit-transform: translateY(-1em);
+    transform: translateY(-1em);
+  }
+}
+@keyframes hvr-icon-float-away {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    -webkit-transform: translateY(-1em);
+    transform: translateY(-1em);
+  }
+}
+
+.hvr-icon-float-away {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+}
+.hvr-icon-float-away .hvr-icon {
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-animation-duration: 0.5s;
+  animation-duration: 0.5s;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+}
+.hvr-icon-float-away:hover .hvr-icon, .hvr-icon-float-away:focus .hvr-icon, .hvr-icon-float-away:active .hvr-icon {
+  -webkit-animation-name: hvr-icon-float-away;
+  animation-name: hvr-icon-float-away;
+  -webkit-animation-timing-function: ease-out;
+  animation-timing-function: ease-out;
+}
+
+input[type=search], input[type=text] {
+  outline: none;
+  padding: 3px 0px 3px 3px;
+  margin: 5px 1px 3px 0px;
+  border: 1px solid #DDDDDD;
+  transition: 0.2s all ease;
+}
+
+input[type=search]:focus, input[type=text]:focus {
+  box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+  padding: 3px 0px 3px 3px;
+  margin: 5px 1px 3px 0px;
+  border: 1px solid rgba(81, 203, 238, 1);
+}
+
+@media (max-width: 769px) {
+
+	.weather-text {
+		font-size: 0.8rem;
+	}
+
 }
 
 @media (max-width: 600px) {
@@ -81,7 +368,15 @@ input[type=search] {
 		grid-template-columns: 50% 50%;
 		grid-template-rows: repeat(6, 33vh);
 	}	
+
 }
+
+@media (max-width: 440px) {
+	#destination {
+		width: 100px;
+	}
+}
+
 
 @media (max-width: 350px) {
 	.container {
@@ -97,6 +392,23 @@ input[type=search] {
 			"language" 
 			"airport" ;
 		grid-template-columns: 100%;
-		grid-template-rows: repeat(10, 350px);
-	}	
+		grid-template-rows: repeat(10, 250px);
+	}
+
+	#destination {
+		width: 100px;
+	}
+
+	#tours li {
+		height: 25vh;
+	}
+
+	#language {
+		height: 25vh;
+	}
+
+	#airport {
+		height: 50vh;
+	}
+
 }

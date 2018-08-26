@@ -359,7 +359,7 @@ app.displayPOIs = (array) => {
 
 app.displayWeather = (object) => {
     const title = `<h1>Weather</h1>`;
-    const icon = `<canvas id="${object.icon}" width="128" height="128"></canvas>`;
+    const icon = `<canvas id="${object.icon}" width="64" height="64"></canvas>`;
     const html = `<h2>Current temp: ${object.currentTemp}</h2>
         <p>${object.conditions}</p>`
     $('#weather').append(title, icon, html);
