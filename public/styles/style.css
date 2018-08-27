@@ -138,6 +138,10 @@ a {
   border: none;
   color: inherit; }
 
+input {
+  -webkit-appearance: none;
+  border-radius: 0; }
+
 .hvr-shadow {
   display: inline-block;
   vertical-align: middle;
@@ -608,6 +612,10 @@ header {
 @media (max-width: 400px) {
   #weather, #tours, #language {
     border-bottom: 1px solid black; }
+  .contentSearchForm {
+    display: none; }
+  #poi {
+    margin-top: 80px; }
   .splashSearchForm {
     width: 300px; }
   header {

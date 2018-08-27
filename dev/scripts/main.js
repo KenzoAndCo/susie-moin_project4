@@ -11,7 +11,7 @@ app.exchangeRate;
 app.tours = [];
 app.airport = {};
 app.language = {};
-
+app.sygicKey = 'MOmJoKEgCz2GyFIO9dOcS5scrkSq8CkB1lPYLHe8';
 
 // method to init Googlde Autocomplete;
 // takes parameter of an id to target specific input tags
@@ -78,7 +78,7 @@ app.getCityCode = (latitude, longitude) => {
         method: 'GET',
         dataType: 'json',
         headers: {
-            'x-api-key': 'zziJYcjlmE8LbWHdvU5vC8UcSFvKEPsC3nkAl7eK'
+            'x-api-key': app.sygicKey,
         },
         data: {
             'location': `${latitude},${longitude}`
@@ -109,7 +109,7 @@ app.getPOIs = (cityCode) => {
         method: 'GET',
         dataType: 'json',
         headers: {
-            'x-api-key': 'zziJYcjlmE8LbWHdvU5vC8UcSFvKEPsC3nkAl7eK'
+            'x-api-key': app.sygicKey,
         },
         data: {
             'tags_not': 'Airport',
@@ -149,7 +149,7 @@ app.getAirports = (lat, lng) => {
         method: 'GET',
         dataType: 'json',
         headers: {
-            'x-api-key': 'zziJYcjlmE8LbWHdvU5vC8UcSFvKEPsC3nkAl7eK'
+            'x-api-key': app.sygicKey,
         },
         data: {
             'location': `${lat},${lng}`,
@@ -192,7 +192,7 @@ app.getTours = (cityCode) => {
         method: 'GET',
         dataType: 'json',
         headers: {
-            'x-api-key': 'zziJYcjlmE8LbWHdvU5vC8UcSFvKEPsC3nkAl7eK'
+            'x-api-key': app.sygicKey,
         },
         data: {
             'parent_place_id': cityCode
@@ -251,10 +251,10 @@ app.convertCurrency = (userCurrency, destinationCurrency) => {
 }
 
 app.displayError = (divID, topic) => {
+    $(`#${divId}`).find('i').toggle(false);
     const title = `<h3>${topic}</h3>`;
-    $(`#${divID}`).append(title, `<h2>Sorry, we don't have detailed information about ${topic} in this area. Try your search again in a nearby city or related area.</h2>`);
+    $(`#${divID}`).append(title, `<h2>Sorry, we don't have detailed information about ${topic} in this area. Try your search again in a related city or nearby region.</h2>`);
 }
-
 
 app.displayCurrency = (object) => {
     $('#currency').find('i').toggle(false);
