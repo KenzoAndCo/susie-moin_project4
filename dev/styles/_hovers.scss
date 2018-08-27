@@ -256,7 +256,6 @@
   
     transform: translateY(-5px);
   
-    /* move the element up by 5px */
   
   }
   
@@ -267,9 +266,19 @@
     -webkit-transform: translateY(5px);
   
     transform: translateY(5px);
-  
-    /* move the element down by 5px (it will stay in place because it's attached to the element that also moves up 5px) */
-  
+
+  }
+
+  @keyframes floating {
+    0% {
+      transform: translateY(0%);	
+    }
+    50% {
+      transform: translateY(8%);	
+    }	
+    100% {
+      transform: translateY(0%);
+    }			
   }
   
   

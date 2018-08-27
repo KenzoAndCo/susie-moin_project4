@@ -12,18 +12,26 @@
 </head>
 <body>
     <section class="splashPage" id="splashPage">
-        <h1 class="logo">GetGo</h1>
-        <h2 class="tagline">Get going on your next adventure</h2>
+        <h1 class="logo">GetGo <i class="fas fa-plane hvr-icon"></i></h1>
+        <h2 class="tagline">Get going on your next adventure.</h2>
+        <div class="footerText">
+            <p>© 2018 Moin Gani and Susie Kim</p>
+            <p>Powered by Google Places, Sygic Travel, DarkSky, and RESTful Countries.</p>
+        </div>
     </section>
     
 
     <section class="contentPage" id="contentPage">
         <header>
-            <h4 class="animated fadeInLeft hvr-icon-float-away"><span id="logo">GetGo</span> <i class="fas fa-plane hvr-icon"></i></h4>
+            <a href="index.html" class="animated fadeInLeft hvr-icon-float-away"><span id="logo">GetGo</span> <i class="fas fa-plane hvr-icon"></i></a>
             <h1 id="destinationName"></h1>
         </header>
+
+        
         <section class="container">
-            <div class="content hvr-shadow" id="currency"></div>
+            <div class="content hvr-shadow" id="currency">
+                <h1>wats up yo</h1>
+            </div>
 
             <div class="content" id="poi">
             </div>
@@ -32,13 +40,15 @@
         
             </div>
             <div class="content clearfix hvr-shadow" id="weather"></div>
-            <div class="content hvr-float-shadow" id="language"></div>
-            <div class="content hvr-float-shadow" id="airport"></div>
+            <div class="content" id="language"></div>
+            <div class="content" id="airport"></div>
         </section>
+        <!-- <button id="searchMenu"><i class="fas fa-search"></i></button> -->
     </section>
     
     <form action="" class="splashSearchForm">
         <input type="search" class="splashSearchBar" placeholder="Enter a destination" class="autocomplete" id="destination">
+        <button type="submit" id="submitButton" class="splashSearchButton"><i class="fas fa-search"></i></button>
     </form>
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>

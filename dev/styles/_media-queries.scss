@@ -1,0 +1,94 @@
+@media (max-width: 900px) {
+	.container {
+		grid-template-areas: 
+			"poi poi weather"
+			"poi poi currency" 
+			"airport tours tours"
+			"language tours tours";
+		grid-template-columns: 1fr 1fr 1fr;
+		grid-template-rows: 40% 40% 40% 40%;
+	}	
+
+	#weather {
+		border-bottom: 1px solid black;
+	}
+
+	#poi {
+		border-bottom: none;
+	}
+
+	#airport {
+		border-top: 1px solid black;
+		border-bottom: 1px solid black;
+	}
+}
+
+@media (max-width: 630px) {
+	#destinationName {
+		font-size: 1rem;
+		// margin-left: 20px;
+		left: 150px;
+	}
+
+	#poi {
+		border-bottom: 1px solid black;
+	}
+	#weather {
+		border-bottom: none;
+	}
+
+	#tours {
+		border-bottom: 1px solid black;
+	}
+
+	#airport {
+		border-top: none;
+		border-bottom: none;
+	}
+
+	#logo {
+		display:none;
+	}
+
+	.container {
+		grid-template-areas: 
+			"poi poi"
+			"poi poi" 
+			"weather currency"
+			"tours tours"
+			"tours tours"
+			"language airport" ;
+		grid-template-columns: 50% 50%;
+		grid-template-rows: repeat(6, 40vh);
+	}	
+}
+
+@media (max-width: 400px) {
+	#weather, #tours, #language {
+		border-bottom: 1px solid black;
+	}
+
+	.splashSearchForm {
+		width: 300px;
+	}
+
+	header {
+		position: fixed;
+		z-index: 1;
+		background: $secondary;
+	}
+	
+	.container {
+		grid-template-areas: 
+			"poi" 
+			"poi" 
+			"weather" 
+			"currency"
+			"tours" 
+			"tours" 
+			"language" 
+			"airport" ;
+		grid-template-columns: 100%;
+		grid-template-rows: 295px 295px 200px 200px 295px 295px 200px 200px ;
+	}	
+}

@@ -1,0 +1,47 @@
+$secondary: #f6f6f6;
+
+body {
+	color: black;
+	font-size: 62.5%;
+	font-family: "Work Sans", sans-serif;
+	background: $secondary;
+}
+
+h2 {
+	font-size: 1rem;
+	font-weight: 600;
+	margin: 10px 0px;
+}
+
+h3 {
+	text-transform: uppercase;
+	font-weight: 500;
+	font-size: 0.7rem;
+	letter-spacing: 0.08rem;
+}
+
+p {
+	font-size: 0.8rem;
+}
+
+h4 {
+	font-size: 1.8rem;
+}
+
+button {
+	border: none;
+	background: black;
+	color: white;
+	padding: 5px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+a {
+	padding-bottom: 5px;
+	text-decoration: none;
+}
+
+input[type=search]:focus, input[type=text]:focus, #user:focus {
+	border-bottom: 2px solid rgba(81, 203, 238, 0.5);
+}

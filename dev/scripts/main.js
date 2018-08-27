@@ -41,6 +41,7 @@ app.getDestinationInfo = (location) => {
             app.getCityCode(app.destination.lat, app.destination.lng);
             app.getLanguage(app.destination.countryCode);
             app.getAirports(app.destination.lat, app.destination.lng);
+            console.log(app.destination.countryCode);
         } else {
             alert("Something went wrong." + status);
         }
@@ -84,16 +85,12 @@ app.getCityCode = (latitude, longitude) => {
         }
     })
     .then((res) => {
-        console.log(res);
         const data = res.data.places[0];
-        console.log(data);
 
         // we specifically want to target cities
         // if that result is a level smaller than a city, target the next parent ID
         if (data.level !== 'city') {
             const cityCode = data.parent_ids[0];
-            console.log(data.parent_ids[0]);
-            console.log(cityCode);
             app.getPOIs(cityCode);
             app.getTours(cityCode);
         } else {
@@ -179,7 +176,6 @@ app.getLanguage = (country) => {
             fullText: true
         }
     }) .then((res) => {
-        console.log(res);
         app.language.primary = res[0].languages[0].name;
         if (res[0].languages.length > 1) {
             app.language.secondary = res[0].languages[1].name;
@@ -202,9 +198,7 @@ app.getTours = (cityCode) => {
             'parent_place_id': cityCode
         }
    }).then((res) => {
-        console.log(res);
         const list = res.data.tours;
-        console.log(tours);
         const tours = list.filter((place)=> {
             return place.photo_url && place.url
         });
@@ -219,7 +213,6 @@ app.getTours = (cityCode) => {
                 };
                 app.tours.push(tour);
             }
-            console.log(app.tours);
             app.displayTours(app.tours);
         }
     });
@@ -250,26 +243,24 @@ app.convertCurrency = (userCurrency, destinationCurrency) => {
             compact: 'ultra'
         }
     }).then((res) => {
-        console.log(res);
         app.currency.exchangeRate = res[`${userCurrency}_${destinationCurrency}`];
-        console.log(app.currency.exchangeRate);
 
-        $('#currency').append(`<h2>$1 ${userCurrency} = ${app.currency.symbol} ${app.currency.exchangeRate.toFixed(2)} ${destinationCurrency}</h2>`)
+        $('#currency h2').text(`$1 ${userCurrency} = ${app.currency.symbol} ${app.currency.exchangeRate.toFixed(2)} ${destinationCurrency}`)
 
     });
 }
 
 app.displayError = (divID, topic) => {
-    const title = `<h1>${topic}</h1>`;
-    console.log('error');
+    const title = `<h3>${topic}</h3>`;
     $(`#${divID}`).append(title, `<h2>Sorry, we don't have detailed information about ${topic} in this area. Try your search again in a nearby city or related area.</h2>`);
 }
 
 
 app.displayCurrency = (object) => {
+    $('#currency').find('i').toggle(false);
     const title = `<h3>Currency</h3>`;
     const html = `<h2>The currency used is ${object.symbol} ${object.code}</h2>`;
-    const input = `<form id="userCurrency"><input class="userCurrency  type="search" id="user" placeholder="Enter your location."></form>`;
+    const input = `<form id="userCurrency"><input class="userCurrency  type="search" id="user" placeholder="Enter your location."><button class="submit">Convert</button></form>`;
     $('#currency').append(title,html, input);
     app.getUserInfo();
 }
@@ -294,7 +285,6 @@ app.getUserLocation = (location) => {
                 return component.types[0] === 'country';
             });
             app.user.countryCode = addressComponents[0].short_name;
-            console.log(app.user.countryCode);
         } else {
             alert('Sorry, something went wrong.' + status)
         }
@@ -312,14 +302,13 @@ app.getUserCurrency = (countryCode) => {
         }
     }).then((res) => {
         app.user.code = res[0].currencies[0].code;
-        console.log(app.user.code);
         app.convertCurrency(app.user.code, app.currency.code);
     });
 }
 
 
 app.displayLanguage = (object) => {
-    console.log(object.name, object.nativeName);
+    $('#language').find('i').toggle(false);
     const title = `<h3>Language</h3>`;
     const primary = `<h2>Primary</h2><h4>${object.primary}</h4>`;
     const secondary = `<h2>Secondary</h2><h4>${object.secondary}</h4>`;
@@ -330,10 +319,9 @@ app.displayLanguage = (object) => {
 }
 
 app.displayAirports = (object) => {
+    $('#airport').find('i').toggle(false);
     const title = `<h3>Closest Airport</h3>`;
     const name = `<h4>${object.name}</h4>`;
-    // const desc = `<p>${object.description}</p>`;
-    // const photo = `<img src="${object.photo}"/>`;
     $('#airport').append(title, name);
 }
 
@@ -343,6 +331,7 @@ app.displayAirports = (object) => {
 // create 2 variables, one to act as a "counter" and one to dictate results per page
 // when user clicks 'load more', it appends the next three results, removes the button, and appends a new button at the end of the new results
 app.displayTours = (array) => {
+    $('#tours').find('i').toggle(false);
     const title = `<h3>Top Tours</h3>`;
     $('#tours').append(title);
     
@@ -395,6 +384,7 @@ app.displayTours = (array) => {
 // method to display points of interest
 // same "pagination" system as tours
 app.displayPOIs = (array) => {
+    $('#poi').find('i').toggle(false);
     const title = `<h3>Points of Interest</h3>`;
     $('#poi').append(title);
     if ($(window).width() <= 600) {	
@@ -444,20 +434,26 @@ app.displayPOIs = (array) => {
 }
 
 app.displayWeather = (object) => {
+    $('#weather').find('i').toggle(false);
+    let degrees = '';
     const title = `<h3>Weather</h3>`;
     const icon = `<canvas id="${object.icon}" width="80" height="80"></canvas>`;
+    if (app.destination.countryCode === 'US') {
+        degrees = 'F';
+    } else {
+        degrees = 'C';
+    }
     const html = `<h2>Currently:</h2> 
-    <h4>${object.currentTemp}</h4>
+    <h4>${object.currentTemp}°${degrees}</h4>
         <p class="weatherText">${object.conditions}</p>`
     $('#weather').append(title, icon, html);
     app.loadIcons();
 }
 
 app.randomHero = () => {
-    let i = Math.floor(Math.random() * 5) + 1
-    console.log(i);
+    let i = Math.floor(Math.random() * 10) + 1
     $('.splashPage').css({
-        'background': `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("../../public/assets/hero${i}.jpg")`,
+        'background': `linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url("public/assets/hero${i}.jpg")`,
         'background-position': 'center',
 	    'background-size': 'cover'	
     });
@@ -480,21 +476,26 @@ app.loadIcons = () => {
 
 app.events = () => {
     app.initAutocomplete('destination');
+   
     $('form').on('submit', (e) => {
-        $('#splashPage').toggle(false);
-        $('#contentPage').toggle(true);
-        $('form').removeClass('splashSearchForm');
-        $('#destination').removeClass('splashSearchBar');
-        $('form').addClass('contentSearchForm');
-        $('#destination').addClass('contentSearchBar');
-        e.preventDefault();
-        $('div').empty();
+        $('.content').empty();
+        $('.content').each(function() {
+            $(this).append(`<i class="fas fa-plane hvr-icon loader"></i>`);
+        });
         const destination = $('#destination').val();
         if (destination.length > 0) {
+            $('#splashPage').toggle(false);
+            $('#contentPage').toggle(true);
+            $('form').removeClass('splashSearchForm');
+            $('#destination').removeClass('splashSearchBar');
+            $('#submitButton').removeClass('splashSearchButton');
+            $('#submitButton').addClass('contentSearchButton');
+            $('form').addClass('contentSearchForm');
+            $('#destination').addClass('contentSearchBar');
+            e.preventDefault();
             $('#destinationName').text(destination);
             app.getDestinationInfo(destination);
         }
-        $('#destination').val('');
         app.destination = {};
         app.weather = {};
         app.currency= {};
@@ -503,6 +504,11 @@ app.events = () => {
         app.tours = [];
         app.airport = {};
         app.languages = {};
+        $('#destination').val('');
+    });
+
+    $('#searchMenu').on('click', function() {
+        $('.contentSearchForm').toggle();
     });
 }
 
@@ -514,6 +520,5 @@ app.init = () => {
 }
 
 $(function () {
-    console.log("ready!");
     app.init();
 });
